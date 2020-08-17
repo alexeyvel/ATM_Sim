@@ -6,7 +6,7 @@ namespace ATM_Sim.Algorithms
     /// <summary>
     /// Интерфейс обязующий реализовать метод, который возвращает список c колличеством купюр разного номинала. 
     /// </summary>
-    interface IDispensingAlgorithm
+    public interface IDispensingAlgorithm
     {
         /// <summary>
         /// метод, который возвращает список c колличеством купюр разного номинала согласно выбранного алгоритма. 

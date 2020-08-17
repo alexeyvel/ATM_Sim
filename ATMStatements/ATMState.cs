@@ -108,5 +108,10 @@
         /// Метод отрабатывающий событие клика мыши на клавиши правой нижней клавиши клавиатуры экрана. 
         /// </summary>
         public abstract void button_display_6_Click();
+
+        /// <summary>
+        /// Метод отрабатывающий событие клика мыши на стопке денег.
+        /// </summary>
+        public abstract void clientMoney_Click();
     }
 }

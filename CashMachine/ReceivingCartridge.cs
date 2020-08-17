@@ -2,7 +2,7 @@
 {
     ///<inheritdoc/>
     ///<remarks>Этот класс представляет картриджы предназначенные только для приема купюр</remarks>
-    class ReceivingCartridge : Cartridge
+    public class ReceivingCartridge : Cartridge
     {
         /// <summary>
         /// Конструктор класса. Инициализирует начальное колличество банкнот в картридже 

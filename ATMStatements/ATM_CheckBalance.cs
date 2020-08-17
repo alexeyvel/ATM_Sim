@@ -7,9 +7,14 @@
         ///<inheritdoc/>
         public ATM_CheckBalance(ATM_UI atm_UI) : base(atm_UI) { }
 
+        public override void clientMoney_Click()
+        { 
+        }
+
         public override void cardReader_Click()
         {
         }
+
         public override void button0_Click()
         {
         }
@@ -57,8 +62,7 @@
         ///<remarks>Метод возвращает начальное состояние банкомата и извлекает кредитную карту.</remarks>
         public override void buttonCancel_Click()
         {
-            atm_UI.StateCompleteUsed();
-            atm_UI.state = new ATM_StartScreen(atm_UI);
+            atm_UI.StateStartScreen();
         }
 
         public override void buttonClear_Click()
@@ -92,8 +96,7 @@
         ///<remarks>Метод возвращает начальное состояние банкомата и извлекает кредитную карту.</remarks>
         public override void button_display_6_Click()
         {
-            atm_UI.StateCompleteUsed();
-            atm_UI.state = new ATM_StartScreen(atm_UI);
+            atm_UI.StateStartScreen();
         }
         public override void creditCard_Click()
         {

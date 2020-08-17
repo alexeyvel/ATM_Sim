@@ -1,4 +1,6 @@
-﻿namespace ATM_Sim.ATMStatements
+﻿using ATM_Sim.CashMachine;
+
+namespace ATM_Sim.ATMStatements
 {
     ///<inheritdoc/>
     ///<remarks>Класс, устанавливающий поведение элементов управления при операции снятия денег со счета, колличество которых вводит пользователь</remarks>
@@ -7,7 +9,9 @@
         public ATM_WithdrawCashCustom(ATM_UI atm_UI) : base(atm_UI)
         {
         }
-
+        public override void clientMoney_Click()
+        {
+        }
         public override void cardReader_Click()
         {
         }
@@ -82,15 +86,15 @@
         ///<remarks>Метод возвращает начальное состояние банкомата и извлекает кредитную карту.</remarks>
         public override void buttonCancel_Click()
         {
-            atm_UI.StateCompleteUsed();
-            atm_UI.state = new ATM_StartScreen(atm_UI);
+            atm_UI.StateStartScreen();
         }
         ///<inheritdoc/>
         ///<remarks>Метод удаляет последний введенный с основной клавиатуры символ из переменной снятия денег и перерисовывает основной экран, удаляя последний символ с экрана.</remarks>
         public override void buttonClear_Click()
         {
             atm_UI.AmoumtWithdrawCash = atm_UI.ClearSign(atm_UI.AmoumtWithdrawCash);
-            atm_UI.ReDrawTextBox(atm_UI.textBoxMain, atm_UI.AmoumtWithdrawCash);
+            atm_UI.textBoxMain.Text = atm_UI.AmoumtWithdrawCash;
+            //atm_UI.ReDrawTextBox(atm_UI.textBoxMain, atm_UI.AmoumtWithdrawCash);
         }
         ///<inheritdoc/>
         ///<remarks>Метод проверяет введенную пользователем сумму для снятия на возможность формирования запрошенной суммы из купюр в наличии.
@@ -100,26 +104,7 @@
         ///В противном случае банкомат перейдет в состояние ошибки по наличию доступных к формированию сумммы купюр</remarks>
         public override void buttonEnter_Click()
         {
-            atm_UI.ATMGeneralScreenOperation(null, atm_UI.textBox_MultipleCash, false);
-            if (atm_UI.AmoumtWithdrawCash != "0" && atm_UI.atm.CheckInputForQuantityInATM(uint.Parse(atm_UI.AmoumtWithdrawCash)))
-            {
-                atm_UI.ATMGeneralScreenOperation(Properties.Resources.ATM_WithdrawCashChoice, atm_UI.textBoxMain, false);
-                atm_UI.state = new ATM_WithdrawCashChoice(atm_UI);
-            }
-            else
-            {
-                if (!atm_UI.atm.CheckInputForMultiplicity(uint.Parse(atm_UI.AmoumtWithdrawCash)))
-                {
-                    atm_UI.ATMGeneralScreenOperation(Properties.Resources.ATM_WithdrawCashFailure2, atm_UI.textBoxMain, false);
-                    atm_UI.PrintAvailableDenomination(atm_UI.textBox_MultipleCash);
-                    atm_UI.state = new ATM_WithdrawCashFailure2(atm_UI);
-                }
-                else if (!atm_UI.atm.CheckInputForQuantityInATM(uint.Parse(atm_UI.AmoumtWithdrawCash)))
-                {
-                    atm_UI.ATMGeneralScreenOperation(Properties.Resources.ATM_WithdrawCashFailure3, atm_UI.textBoxMain, false);
-                    atm_UI.state = new ATM_WithdrawCashFailure3(atm_UI);
-                }
-            }
+            atm_UI.StateWithdrawCashChoice();
         }
 
         public override void button_display_1_Click()
@@ -146,8 +131,7 @@
         ///<remarks>Метод возвращает начальное состояние банкомата и извлекает кредитную карту.</remarks>
         public override void button_display_6_Click()
         {
-            atm_UI.StateCompleteUsed();
-            atm_UI.state = new ATM_StartScreen(atm_UI);
+            atm_UI.StateStartScreen();
         }
         public override void creditCard_Click()
         {

@@ -1,4 +1,6 @@
-﻿namespace ATM_Sim.ATMStatements
+﻿using ATM_Sim.CashMachine;
+
+namespace ATM_Sim.ATMStatements
 {
     ///<inheritdoc/>
     ///<remarks>Класс, устанавливающий поведение элементов управления при запросе операции внесения денег на счет</remarks>
@@ -57,7 +59,10 @@
 
         public override void buttonCancel_Click()
         {
-            //реализация в процессе...
+            if (!atm_UI.ReceivingShutter)
+            {
+                atm_UI.StateChoseOperation();
+            }
         }
 
         public override void buttonClear_Click()
@@ -66,7 +71,8 @@
 
         public override void buttonEnter_Click()
         {
-            //реализация в процессе...
+            if(atm_UI.ReceivingShutter)
+                atm_UI.StatePutMoneySuccess();
         }
 
         public override void button_display_1_Click()
@@ -77,8 +83,10 @@
         }
         public override void button_display_3_Click()
         {
-            atm_UI.ATMGeneralScreenOperation(Properties.Resources.ATM_ChoseOperation, atm_UI.textBoxMain, false);
-            atm_UI.state = new ATM_ChoseOperation(atm_UI); ////////////////
+            if (!atm_UI.ReceivingShutter)
+            {
+                atm_UI.StateChoseOperation();
+            }
         }
         public override void button_display_4_Click()
         {
@@ -94,6 +102,10 @@
         }
         public override void dispensingShutter_Click()
         {
+        }
+        public override void clientMoney_Click()
+        {
+            atm_UI.ClientMoneyMove();
         }
     }
 }

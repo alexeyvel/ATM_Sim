@@ -6,7 +6,7 @@ namespace ATM_Sim.Algorithms
     /// <summary>
     /// Класс с алгоритмами для выдачи купюр преимущественно крупного достоинства. 
     /// </summary>
-    class DispenseExchange : IDispensingAlgorithm
+    public class DispenseExchange : IDispensingAlgorithm
     {
         ///<inheritdoc/>
         ///<remarks>Метод возвращает список в котором преимущественно купюры крупного достоинства.</remarks>

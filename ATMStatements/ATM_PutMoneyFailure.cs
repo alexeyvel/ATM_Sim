@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ATM_Sim.CashMachine;
+using System;
 
 namespace ATM_Sim.ATMStatements
 {
@@ -13,107 +14,104 @@ namespace ATM_Sim.ATMStatements
 
         public override void cardReader_Click()
         {
-            throw new NotImplementedException();
         }
         public override void button0_Click()
         {
-            throw new NotImplementedException();
         }
 
         public override void button1_Click()
         {
-            throw new NotImplementedException();
         }
 
         public override void button2_Click()
         {
-            throw new NotImplementedException();
         }
 
         public override void button3_Click()
         {
-            throw new NotImplementedException();
         }
 
         public override void button4_Click()
         {
-            throw new NotImplementedException();
         }
 
         public override void button5_Click()
         {
-            throw new NotImplementedException();
         }
 
         public override void button6_Click()
         {
-            throw new NotImplementedException();
         }
 
         public override void button7_Click()
         {
-            throw new NotImplementedException();
         }
 
         public override void button8_Click()
         {
-            throw new NotImplementedException();
         }
 
         public override void button9_Click()
         {
-            throw new NotImplementedException();
         }
 
         public override void button1000_Click()
         {
-            throw new NotImplementedException();
         }
 
         public override void buttonCancel_Click()
         {
-            throw new NotImplementedException();
+            if (!atm_UI.ReceivingShutter)
+            {
+                atm_UI.StateStartScreen();
+            }
         }
 
         public override void buttonClear_Click()
         {
-            throw new NotImplementedException();
         }
 
         public override void buttonEnter_Click()
         {
-            throw new NotImplementedException();
         }
 
         public override void button_display_1_Click()
         {
-            throw new NotImplementedException();
         }
         public override void button_display_2_Click()
         {
-            throw new NotImplementedException();
         }
         public override void button_display_3_Click()
         {
-            throw new NotImplementedException();
+            if (!atm_UI.ReceivingShutter)
+            {
+                atm_UI.StateChoseOperation();
+            }
         }
         public override void button_display_4_Click()
         {
-            throw new NotImplementedException();
         }
         public override void button_display_5_Click()
         {
-            throw new NotImplementedException();
         }
         public override void button_display_6_Click()
         {
-            throw new NotImplementedException();
+            if (!atm_UI.ReceivingShutter)
+            {
+                atm_UI.StateStartScreen();
+            }
         }
         public override void creditCard_Click()
         {
         }
         public override void dispensingShutter_Click()
         {
+        }
+        public override void clientMoney_Click()
+        {
+            atm_UI.SetReceivingShutterState(Properties.Resources.ReceivingShutterPasiv);
+            if (atm_UI.ReceivingShutter)
+                atm_UI.ClearReceivingShutter();
         }
     }
 }

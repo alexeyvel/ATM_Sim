@@ -57,8 +57,7 @@
         ///<remarks>Метод возвращает начальное состояние банкомата и извлекает кредитную карту.</remarks>
         public override void buttonCancel_Click()
         {
-            atm_UI.StateCompleteUsed();
-            atm_UI.state = new ATM_StartScreen(atm_UI);
+            atm_UI.StateStartScreen();
         }
 
         public override void buttonClear_Click()
@@ -79,8 +78,7 @@
         ///<remarks>Метод возвращает банкомат в состояние запроса PIN кода.</remarks>
         public override void button_display_3_Click()
         {
-            atm_UI.StateRequestPIN();
-            atm_UI.state = new ATM_RequestPIN(atm_UI);
+            atm_UI.StateRequestPIN();           
         }
         public override void button_display_4_Click()
         {
@@ -92,13 +90,15 @@
         ///<remarks>Метод возвращает начальное состояние банкомата и извлекает кредитную карту.</remarks>
         public override void button_display_6_Click()
         {
-            atm_UI.StateCompleteUsed();
-            atm_UI.state = new ATM_StartScreen(atm_UI);
+            atm_UI.StateStartScreen();
         }
         public override void creditCard_Click()
         {
         }
         public override void dispensingShutter_Click()
+        {
+        }
+        public override void clientMoney_Click()
         {
         }
     }

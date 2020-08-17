@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace ATM_Sim.Server
 {
@@ -8,18 +9,24 @@ namespace ATM_Sim.Server
     /// </summary>
     class Account
     {
+        OperationEventArgs args;
+        /// <summary>
+        /// Событие возникающее при выполнении операций с классом  Account
+        /// </summary>
+        public event EventHandler<OperationEventArgs> AccountOperation;
         /// <value>Свойство, позволяющее получить ID клиента</value>
         public static int id { get; private set; } = 0;
 
         /// <value>Свойство, позволяющее получить список клиентов</value>
         public List<Client> Clients { get; private set; }
-
+        
         /// <summary>
         /// Конструктор класса. Инициализирует новый список клиентов по умолчанию
         /// </summary>
         public Account()
         {
             Clients = new List<Client>();
+            args = new OperationEventArgs();
         }
 
         /// <summary>
@@ -29,8 +36,16 @@ namespace ATM_Sim.Server
         public Account(List<Client> clients)
         {
             Clients = clients;
+            args = new OperationEventArgs();
         }
-
+        /// <summary>
+        /// Метод необходимый для вызова события AccountOperation
+        /// </summary>
+        /// <param name="e">Параметр, определяющий объект данных события</param>
+        private void OnAccountOperation(OperationEventArgs e)
+        {
+            AccountOperation?.Invoke(this, e);
+        }
         /// <summary>
         /// Метод генерирующий каждый раз новый ID клиента 
         /// </summary>
@@ -48,6 +63,10 @@ namespace ATM_Sim.Server
         public void AddNewClient(Client client)
         {
             Clients.Add(client);
+            args.Message = $"Зарегестрирован новый клиент: {client.Surname} {client.Name} {client.Patrinymic}" + Environment.NewLine +
+                $"ID: { client.ID}" + Environment.NewLine + $"PIN: {client.PIN}" + Environment.NewLine +$"Баланс: { client.HasMoney}";
+            args.TimeStartOperation = DateTime.Now;
+            OnAccountOperation(args);
         }
 
         /// <summary>
@@ -79,8 +98,11 @@ namespace ATM_Sim.Server
         /// <param name="client">Клиент</param>
         /// <returns>Целое натуральное число - баланс</returns>
         public uint ReturnBalance(Client client)
-        {
+        {           
             int id = client.ID;
+            args.Message = $"Запрос баланса: {GetCurrentClient(id).HasMoney}";
+            args.TimeStartOperation = DateTime.Now;
+            OnAccountOperation(args);
             return GetCurrentClient(id).HasMoney;
         }
 
@@ -92,6 +114,9 @@ namespace ATM_Sim.Server
         public void Put(uint value, Client client)
         {
             int id = client.ID;
+            args.Message = $"Пополнение счета на сумму: {value}";
+            args.TimeStartOperation = DateTime.Now;
+            OnAccountOperation(args);
             GetCurrentClient(id).HasMoney += value;
         }
 
@@ -107,6 +132,9 @@ namespace ATM_Sim.Server
             if (GetCurrentClient(id).HasMoney >= value)
             {
                 GetCurrentClient(id).HasMoney -= value;
+                args.Message = $"Списание со счета на сумму: {value}";
+                args.TimeStartOperation = DateTime.Now;
+                OnAccountOperation(args);
                 return true;
             }
             else return false;    

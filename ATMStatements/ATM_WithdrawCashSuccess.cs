@@ -98,5 +98,8 @@
         public override void dispensingShutter_Click()
         {
         }
+        public override void clientMoney_Click()
+        {
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace ATM_Sim.CashMachine
     /// <summary>
     /// Класс картриджа (кассеты для денег) у банкомата. 
     /// </summary>
-    abstract class Cartridge
+    public abstract class Cartridge
     {
         /// <summary>Переменная, хранящая значение, о заполненности картриджа купюрами (<c>true</c> - если картридж заполнен)</summary>
         protected bool isFull = false;

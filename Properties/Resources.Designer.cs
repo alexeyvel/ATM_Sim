@@ -163,6 +163,16 @@ namespace ATM_Sim.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ATM_Wait {
+            get {
+                object obj = ResourceManager.GetObject("ATM_Wait", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ATM_WithdrawCash {
             get {
                 object obj = ResourceManager.GetObject("ATM_WithdrawCash", resourceCulture);
@@ -263,6 +273,16 @@ namespace ATM_Sim.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Client_Money {
+            get {
+                object obj = ResourceManager.GetObject("Client_Money", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CreditCard {
             get {
                 object obj = ResourceManager.GetObject("CreditCard", resourceCulture);
@@ -296,6 +316,16 @@ namespace ATM_Sim.Properties {
         internal static System.Drawing.Bitmap ReceivingShutterActiv {
             get {
                 object obj = ResourceManager.GetObject("ReceivingShutterActiv", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ReceivingShutterMoney {
+            get {
+                object obj = ResourceManager.GetObject("ReceivingShutterMoney", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

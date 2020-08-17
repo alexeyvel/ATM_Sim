@@ -2,7 +2,7 @@
 {
     ///<inheritdoc/>
     ///<remarks>Этот класс представляет картриджы где храняться деньги только для выдачи</remarks>
-    class DispensingCartridge : Cartridge
+    public class DispensingCartridge : Cartridge
     {
         /// <value>Свойство, позволяющее получить номинал купюр</value>
         public Denomination DenominationCash { get; private set; }

@@ -80,6 +80,7 @@
     <Compile Include="ATM_UI.Designer.cs">
       <DependentUpon>ATM_UI.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperationEventArgs.cs" />
     <Compile Include="Person\PersonalData.cs" />
     <Compile Include="Person\User.cs" />
     <Compile Include="Program.cs" />
@@ -131,12 +132,6 @@
     <None Include="Resources\ATM_OperationFault.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ATM_PutMoney.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ATM_PutMoneyFailure.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\ATM_PutMoneySuccess.png" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +181,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ReceivingShutterActiv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ReceivingShutterMoney.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Client_Money.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ATM_PutMoney.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ATM_PutMoneyFailure.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ATM_Wait.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

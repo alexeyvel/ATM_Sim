@@ -10,13 +10,21 @@ namespace ATM_Sim.CashMachine
     /// </summary>
     class ATM
     {
-        public List<Cartridge> Cartridges { get; private set; }
+        OperationEventArgs args;
+        /// <summary>
+        /// Событие возникающее при выполнении операций с классом  Account
+        /// </summary>
+        public event EventHandler<OperationEventArgs> ATMOperation;
+
         private Account account;
         private DispensingCartridge tempCarttridge;
         private List<DispensingCartridge> availableDispensingCartridges;
         private List<DispensingCartridge> emptyDispensingCartridges;
         private List<List<DispensingCartridge>> allPossibleDispensingСases;
         private IDispensingAlgorithm dispensingAlgorithm;
+
+        public List<Cartridge> Cartridges { get; private set; }
+        public List<DispensingCartridge> WithdrawList { get; private set; }
 
         /// <summary>
         /// Конструктор класса. При создании экземпляра класса банкомата, так же создаются приемный и выдающие наличность картриджы. 
@@ -29,6 +37,16 @@ namespace ATM_Sim.CashMachine
             Cartridges.Add(new ReceivingCartridge(0));
             foreach (Denomination den in Enum.GetValues(typeof(Denomination)))
                 Cartridges.Add(new DispensingCartridge(den, SetRquiredCapacity(den)));
+            args = new OperationEventArgs();
+        }
+
+        /// <summary>
+        /// Метод необходимый для вызова события ATMOperation
+        /// </summary>
+        /// <param name="e">Параметр, определяющий объект данных события</param>
+        private void OnATMOperation(OperationEventArgs e)
+        {
+            ATMOperation?.Invoke(this, e);
         }
 
         /// <summary>
@@ -314,13 +332,20 @@ namespace ATM_Sim.CashMachine
         {
             if ( allPossibleDispensingСases != null && allPossibleDispensingСases.Count > 0 && dispensingAlgorithm != null)
             {
+                args.Message = "Всего выдано банкнот:" + Environment.NewLine;
+                OnATMOperation(args);
                 int i = 0;
-                var withdrawList = dispensingAlgorithm.ReturnQuantityBanknote(allPossibleDispensingСases);                
+                WithdrawList = dispensingAlgorithm.ReturnQuantityBanknote(allPossibleDispensingСases);                
                 foreach (var cartridge in Cartridges)
                 {
                     if (cartridge is DispensingCartridge)
                     {
-                        cartridge.CurrentQuantityBanknote -= withdrawList[i].CurrentQuantityBanknote;
+                        cartridge.CurrentQuantityBanknote -= WithdrawList[i].CurrentQuantityBanknote;
+                        if(WithdrawList[i].CurrentQuantityBanknote > 0)
+                        {
+                            args.Message = $"{((DispensingCartridge)cartridge).DenominationCash.GetHashCode()} - {WithdrawList[i].CurrentQuantityBanknote} шт." + Environment.NewLine;
+                            OnATMOperation(args);
+                        }                        
                         i++;
                     }
                 }

@@ -85,8 +85,7 @@
         ///<remarks>Метод возвращает начальное состояние банкомата и извлекает кредитную карту.</remarks>
         public override void buttonCancel_Click()
         {
-            atm_UI.StateCompleteUsed();
-            atm_UI.state = new ATM_StartScreen(atm_UI);
+            atm_UI.StateStartScreen();
         }
         ///<inheritdoc/>
         ///<remarks>Метод удаляет последний введенный с основной клавиатуры символ из переменной где хранится PIN код и перерисовывает основной экран, удаляя *.</remarks>
@@ -94,12 +93,11 @@
         {
             atm_UI.StringPIN = atm_UI.ClearSign(atm_UI.StringPIN);
             atm_UI.FullPIN = atm_UI.ClearSign(atm_UI.FullPIN);
-            atm_UI.ReDrawTextBox(atm_UI.textBoxMain, atm_UI.StringPIN);
+            atm_UI.textBoxMain.Text = atm_UI.StringPIN;
         }
         ///<inheritdoc/>
         ///<remarks>Метод проверяет введеный PIN код. Если PIN код правильный - банкомат переходит в режим выбора операций.
         ///Если PIN код не правильный  - банкомат переходит в режим запроса на повторный ввод PIN кода</remarks>
-        //Метод учитывающий колличество попыток ввода PIN кода в сутки (например не более 3 неправильных вводов PIN кода за сутки) в процессе реализации...
         public override void buttonEnter_Click()
         {
             if (atm_UI.account.CheckingPIN(atm_UI.client, atm_UI.FullPIN))
@@ -109,8 +107,7 @@
             }
             else 
             {
-                atm_UI.StateInputPINFault();
-                atm_UI.state = new ATM_InputPINFault(atm_UI);
+                atm_UI.StateInputPINFault();                
             }
                 
         }
@@ -141,6 +138,9 @@
         {
         }
         public override void dispensingShutter_Click()
+        {
+        }
+        public override void clientMoney_Click()
         {
         }
     }

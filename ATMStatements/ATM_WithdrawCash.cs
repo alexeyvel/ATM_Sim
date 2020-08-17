@@ -58,8 +58,7 @@
         ///<remarks>Метод возвращает начальное состояние банкомата и извлекает кредитную карту.</remarks>
         public override void buttonCancel_Click()
         {
-            atm_UI.StateCompleteUsed();
-            atm_UI.state = new ATM_StartScreen(atm_UI);
+            atm_UI.StateStartScreen();
         }
         ///<inheritdoc/>
         ///<remarks>Метод удаляет выбранную из пресетов сумму для снятия.</remarks>
@@ -75,25 +74,7 @@
         ///В противном случае банкомат перейдет в состояние ошибки по наличию доступных к формированию сумммы купюр</remarks>
         public override void buttonEnter_Click()
         {
-            if (atm_UI.AmoumtWithdrawCash !="0" && atm_UI.atm.CheckInputForQuantityInATM(uint.Parse(atm_UI.AmoumtWithdrawCash)))
-            {
-                atm_UI.ATMGeneralScreenOperation(Properties.Resources.ATM_WithdrawCashChoice, atm_UI.textBoxMain, false);
-                atm_UI.state = new ATM_WithdrawCashChoice(atm_UI);
-            }
-            else
-            {
-                if (!atm_UI.atm.CheckInputForMultiplicity(uint.Parse(atm_UI.AmoumtWithdrawCash)))
-                {
-                    atm_UI.ATMGeneralScreenOperation(Properties.Resources.ATM_WithdrawCashFailure2, atm_UI.textBoxMain, false);
-                    atm_UI.PrintAvailableDenomination(atm_UI.textBox_MultipleCash);
-                    atm_UI.state = new ATM_WithdrawCashFailure2(atm_UI);
-                }
-                else if (!atm_UI.atm.CheckInputForQuantityInATM(uint.Parse(atm_UI.AmoumtWithdrawCash)))
-                {
-                    atm_UI.ATMGeneralScreenOperation(Properties.Resources.ATM_WithdrawCashFailure3, atm_UI.textBoxMain, false);
-                    atm_UI.state = new ATM_WithdrawCashFailure3(atm_UI);
-                }
-            }
+            atm_UI.StateWithdrawCashChoice();
         }
         ///<inheritdoc/>
         ///<remarks>Метод устанавливает сумму для снятия в размере 200 у.е.</remarks>
@@ -129,7 +110,7 @@
         ///<remarks>Метод очищает переменную для хранения суммы снятия и переводит банкомат в режим ручного ввода требуемой суммы .</remarks>
         public override void button_display_6_Click()
         {
-            atm_UI.AmoumtWithdrawCash = "0";
+            atm_UI.AmoumtWithdrawCash = "";
             atm_UI.PrintAvailableDenomination(atm_UI.textBox_MultipleCash);
             atm_UI.ATMGeneralScreenOperation(Properties.Resources.ATM_WithdrawCashCustom, atm_UI.textBoxMain, true);
             atm_UI.state = new ATM_WithdrawCashCustom(atm_UI);
@@ -138,6 +119,9 @@
         {
         }
         public override void dispensingShutter_Click()
+        {
+        }
+        public override void clientMoney_Click()
         {
         }
     }

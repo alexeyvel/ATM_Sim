@@ -85,18 +85,18 @@
 
         }
         ///<inheritdoc/>
-        ///<remarks>Метод переводит банкомат в состояние запроса PIN кода.
-        ///Дополнительно блокирует кнопки настройки колличества банкнот в картриджах банкомата 
-        ///Дополнительно перерисовывает картридер</remarks>
+        ///<remarks>Метод переводит банкомат в состояние запроса PIN кода.</remarks>
         public override void creditCard_Click()
         {
             atm_UI.LockSettingButtons(false);
             atm_UI.ShowCreditCard(false);
             atm_UI.SetCardReaderState(Properties.Resources.CartReaderPasiv);
             atm_UI.StateRequestPIN();
-            atm_UI.state = new ATM_RequestPIN(atm_UI);
         }
         public override void dispensingShutter_Click()
+        {
+        }
+        public override void clientMoney_Click()
         {
         }
     }
